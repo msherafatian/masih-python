@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Data files (we'll be more specific later)
+*.h5ad
+*.h5
+*.loom
+*.rds
+*.csv
+*.xlsx
+*.txt
+!requirements.txt
+
+# Temporary files
+*.log
+tmp/
+temp/
+.DS_Store
+
+# Dash cache
+dash_cache/
+
+# Session data
+sessions/
+*.pkl
+*.pickle
+
+# Large files
+data/
+!tests/data/
