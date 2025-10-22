@@ -40,17 +40,8 @@ def register_tab_switching(app):
 
         # Import module layouts dynamically to avoid circular imports
         if active_tab == "upload":
-            # For now, return a placeholder
-            return dbc.Container([
-                dbc.Alert(
-                    [
-                        html.H4("Upload & QC Module",
-                                className="alert-heading"),
-                        html.P("Upload module will be implemented here."),
-                    ],
-                    color="info"
-                )
-            ])
+            from masih.modules.upload import create_upload_layout
+            return create_upload_layout()
 
         elif active_tab == "cluster":
             return dbc.Container([
@@ -211,14 +202,13 @@ def register_all_callbacks(app):
     # Register core tab switching callbacks
     register_tab_switching(app)
 
+    # Register upload module callbacks
+    from masih.modules.upload import register_upload_callbacks
+    register_upload_callbacks(app)
+
     # Module-specific callbacks will be registered here as we build them
     # Example:
-    # from masih.modules.upload import register_upload_callbacks
-    # register_upload_callbacks(app)
-
     # from masih.modules.cluster_analysis import register_cluster_callbacks
     # register_cluster_callbacks(app)
-
-    # etc...
 
     print("✓ All callbacks registered successfully")
