@@ -44,16 +44,8 @@ def register_tab_switching(app):
             return create_upload_layout()
 
         elif active_tab == "cluster":
-            return dbc.Container([
-                dbc.Alert(
-                    [
-                        html.H4("Cluster Analysis Module",
-                                className="alert-heading"),
-                        html.P("Cluster analysis module will be implemented here."),
-                    ],
-                    color="info"
-                )
-            ])
+            from masih.modules.cluster_analysis import create_cluster_analysis_layout
+            return create_cluster_analysis_layout()
 
         elif active_tab == "markers":
             return dbc.Container([
@@ -205,6 +197,10 @@ def register_all_callbacks(app):
     # Register upload module callbacks
     from masih.modules.upload import register_upload_callbacks
     register_upload_callbacks(app)
+
+    # Register cluster analysis module callbacks
+    from masih.modules.cluster_analysis import register_cluster_analysis_callbacks
+    register_cluster_analysis_callbacks(app)
 
     # Module-specific callbacks will be registered here as we build them
     # Example:
