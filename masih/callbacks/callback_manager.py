@@ -47,55 +47,25 @@ def register_tab_switching(app):
             from masih.modules.cluster_analysis import create_cluster_analysis_layout
             return create_cluster_analysis_layout()
 
+        elif active_tab == "cellcycle":
+            from masih.modules.cellcycle import create_cellcycle_layout
+            return create_cellcycle_layout()
+
         elif active_tab == "markers":
-            return dbc.Container([
-                dbc.Alert(
-                    [
-                        html.H4("Marker Genes Module",
-                                className="alert-heading"),
-                        html.P("Marker detection module will be implemented here."),
-                    ],
-                    color="info"
-                )
-            ])
+            from masih.modules.markers import create_markers_layout
+            return create_markers_layout()
 
         elif active_tab == "pathways":
-            return dbc.Container([
-                dbc.Alert(
-                    [
-                        html.H4("CancerSEA Pathways Module",
-                                className="alert-heading"),
-                        html.P("Pathway scoring module will be implemented here."),
-                    ],
-                    color="info"
-                )
-            ])
+            from masih.modules.cancersea import create_cancersea_layout
+            return create_cancersea_layout()
 
         elif active_tab == "trajectory":
-            return dbc.Container([
-                dbc.Alert(
-                    [
-                        html.H4("Trajectory Analysis Module",
-                                className="alert-heading"),
-                        html.P(
-                            "Trajectory inference module will be implemented here."),
-                    ],
-                    color="info"
-                )
-            ])
+            from masih.modules.trajectory import create_trajectory_layout
+            return create_trajectory_layout()
 
         elif active_tab == "compare":
-            return dbc.Container([
-                dbc.Alert(
-                    [
-                        html.H4("Comparative Analysis Module",
-                                className="alert-heading"),
-                        html.P(
-                            "Pathway comparison module will be implemented here."),
-                    ],
-                    color="info"
-                )
-            ])
+            from masih.modules.compare import create_compare_layout
+            return create_compare_layout()
 
         elif active_tab == "explorer":
             return dbc.Container([
@@ -110,21 +80,15 @@ def register_tab_switching(app):
             ])
 
         elif active_tab == "export":
-            return dbc.Container([
-                dbc.Alert(
-                    [
-                        html.H4("Export Module", className="alert-heading"),
-                        html.P("Export functionality will be implemented here."),
-                    ],
-                    color="info"
-                )
-            ])
+            from masih.modules.export import create_export_layout
+            return create_export_layout()
 
         return html.Div("Unknown tab")
 
     @app.callback(
         [
             Output("cluster-tab", "disabled"),
+            Output("cellcycle-tab", "disabled"),  # NEW!
             Output("markers-tab", "disabled"),
             Output("pathways-tab", "disabled"),
             Output("trajectory-tab", "disabled"),
@@ -146,10 +110,17 @@ def register_tab_switching(app):
         """
         if flags is None:
             # All tabs disabled if no data
-            return True, True, True, True, True, True, True
+            return True, True, True, True, True, True, True, True
 
+        # processed = flags.get('processed', False)
+        # All analysis tabs enabled after processing
+        # return (not processed, not processed, not processed,
+        #        not processed, not processed, not processed, not processed, not processed)
         # Cluster tab: enabled after processing is done
         cluster_disabled = not flags.get('processed', False)
+
+        # cellcycle tab: enabled after processing is done
+        cellcycle_disabled = not flags.get('processed', False)
 
         # Markers tab: enabled after processing is done
         markers_disabled = not flags.get('processed', False)
@@ -171,6 +142,7 @@ def register_tab_switching(app):
 
         return (
             cluster_disabled,
+            cellcycle_disabled,
             markers_disabled,
             pathways_disabled,
             trajectory_disabled,
@@ -201,6 +173,30 @@ def register_all_callbacks(app):
     # Register cluster analysis module callbacks
     from masih.modules.cluster_analysis import register_cluster_analysis_callbacks
     register_cluster_analysis_callbacks(app)
+
+    # Register marker genes module callbacks
+    from masih.modules.markers import register_markers_callbacks
+    register_markers_callbacks(app)
+
+    # Register CancerSEA pathways module callbacks
+    from masih.modules.cancersea import register_cancersea_callbacks
+    register_cancersea_callbacks(app)
+
+    # Register export module callbacks
+    from masih.modules.export import register_export_callbacks
+    register_export_callbacks(app)
+
+    # Register cell cycle module callbacks
+    from masih.modules.cellcycle import register_cellcycle_callbacks
+    register_cellcycle_callbacks(app)
+
+    # Register trajectory module callbacks
+    from masih.modules.trajectory import register_trajectory_callbacks
+    register_trajectory_callbacks(app)
+
+    # Register compare module callbacks
+    from masih.modules.compare import register_compare_callbacks
+    register_compare_callbacks(app)
 
     # Module-specific callbacks will be registered here as we build them
     # Example:

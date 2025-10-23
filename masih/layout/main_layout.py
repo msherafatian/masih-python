@@ -101,11 +101,23 @@ def create_data_stores():
             storage_type='session',
             data=None
         ),
+        # Compare analysis results
+        dcc.Store(
+            id='compare-store',
+            storage_type='local',
+            data=None
+        ),
 
         # Trajectory results
         dcc.Store(
             id='trajectory-store',
             storage_type='session',
+            data=None
+        ),
+        # CancerSEA pathway scores
+        dcc.Store(
+            id='cancersea-store',
+            storage_type='local',
             data=None
         ),
 
@@ -140,6 +152,11 @@ def create_tabs():
                 disabled=True,
                 id="cluster-tab"
             ),
+            dbc.Tab(label="Cell Cycle",
+                    tab_id="cellcycle",
+                    label_style={"cursor": "pointer"},
+                    id="cellcycle-tab",
+                    disabled=True),  # NEW!
             dbc.Tab(
                 label="Marker Genes",
                 tab_id="markers",

@@ -69,6 +69,181 @@ class AppConfig:
     # Random seed for reproducibility
     RANDOM_STATE = 42
 
+# CancerSEA Pathway Gene Sets
+    # These are the 14 functional states from CancerSEA
+    CANCERSEA_PATHWAYS = {
+        'Angiogenesis': [
+            'VEGFA', 'FLT1', 'KDR', 'FLT4', 'NRP1', 'NRP2', 'ANGPT1', 'ANGPT2',
+            'TEK', 'PDGFA', 'PDGFB', 'PDGFRA', 'PDGFRB', 'FGF2', 'FGFR1',
+            'HIF1A', 'EPAS1', 'ARNT', 'EDN1', 'EDNRA', 'EDNRB', 'PGF',
+            'SPHK1', 'S1PR1', 'COL18A1', 'THBS1', 'SERPINF1', 'JAG1',
+            'DLL4', 'NOTCH1', 'NOTCH4', 'ENG', 'ACVRL1', 'TGFB1', 'TGFBR1',
+            'TGFBR2', 'MMP2', 'MMP9', 'TIMP1', 'TIMP2', 'PECAM1', 'CDH5',
+            'ICAM1', 'VCAM1', 'SELE', 'SELP', 'ITGAV', 'ITGB3', 'PTK2',
+            'SRC', 'AKT1', 'PIK3CA', 'MAPK1', 'MAPK3'
+        ],
+
+        'Apoptosis': [
+            'BAX', 'BAK1', 'BCL2', 'BCL2L1', 'MCL1', 'BCL2L2', 'BID', 'BAD',
+            'BBC3', 'PMAIP1', 'BMF', 'HRK', 'BOK', 'CASP3', 'CASP7', 'CASP8',
+            'CASP9', 'CASP10', 'APAF1', 'CYCS', 'FADD', 'FAS', 'FASLG',
+            'TNFRSF10A', 'TNFRSF10B', 'TNFSF10', 'TNF', 'TNFRSF1A', 'TRADD',
+            'TRAF2', 'RIPK1', 'CFLAR', 'TP53', 'TP73', 'MDM2', 'CDKN1A',
+            'PTEN', 'DIABLO', 'XIAP', 'BIRC2', 'BIRC3', 'BIRC5', 'HTRA2',
+            'AIFM1', 'ENDOG', 'BCL2L11', 'DFFB', 'DFFA', 'PARP1', 'ATM',
+            'ATR', 'CHEK1', 'CHEK2', 'ABL1', 'JUN', 'FOS'
+        ],
+
+        'Cell_cycle': [
+            'CCNA1', 'CCNA2', 'CCNB1', 'CCNB2', 'CCND1', 'CCND2', 'CCND3',
+            'CCNE1', 'CCNE2', 'CDK1', 'CDK2', 'CDK4', 'CDK6', 'CDKN1A',
+            'CDKN1B', 'CDKN1C', 'CDKN2A', 'CDKN2B', 'CDKN2C', 'CDKN2D',
+            'E2F1', 'E2F2', 'E2F3', 'RB1', 'RBL1', 'RBL2', 'TP53', 'MDM2',
+            'ATM', 'ATR', 'CHEK1', 'CHEK2', 'CDC25A', 'CDC25B', 'CDC25C',
+            'WEE1', 'PKMYT1', 'PLK1', 'AURKA', 'AURKB', 'BUB1', 'BUB1B',
+            'BUB3', 'MAD1L1', 'MAD2L1', 'CDC20', 'FZR1', 'ANAPC1', 'SKP2',
+            'CUL1', 'FBXW7', 'MKI67', 'PCNA', 'MCM2', 'MCM3', 'MCM4',
+            'MCM5', 'MCM6', 'MCM7', 'ORC1', 'ORC2', 'CDC6', 'CDT1'
+        ],
+
+        'Differentiation': [
+            'NOTCH1', 'NOTCH2', 'NOTCH3', 'NOTCH4', 'JAG1', 'JAG2', 'DLL1',
+            'DLL3', 'DLL4', 'HES1', 'HES5', 'HEY1', 'HEY2', 'WNT1', 'WNT2',
+            'WNT3', 'WNT3A', 'WNT5A', 'WNT7A', 'CTNNB1', 'LEF1', 'TCF7',
+            'TCF7L1', 'TCF7L2', 'AXIN1', 'APC', 'GSK3B', 'SHH', 'IHH',
+            'DHH', 'PTCH1', 'PTCH2', 'SMO', 'GLI1', 'GLI2', 'GLI3', 'SUFU',
+            'TGFB1', 'TGFB2', 'TGFB3', 'TGFBR1', 'TGFBR2', 'SMAD2', 'SMAD3',
+            'SMAD4', 'SMAD7', 'BMP2', 'BMP4', 'BMP7', 'BMPR1A', 'BMPR2',
+            'SMAD1', 'SMAD5', 'SMAD9', 'RUNX2', 'SOX2', 'SOX9', 'NANOG',
+            'POU5F1', 'MYC', 'MYCN', 'KLF4', 'PAX6', 'NKX2-1'
+        ],
+
+        'DNA_damage': [
+            'ATM', 'ATR', 'CHEK1', 'CHEK2', 'TP53', 'TP73', 'MDM2', 'MDM4',
+            'CDKN1A', 'GADD45A', 'GADD45B', 'GADD45G', 'H2AFX', 'HIST1H2AX',
+            'PRKDC', 'XRCC5', 'XRCC6', 'LIG4', 'NHEJ1', 'DCLRE1C', 'RAD50',
+            'MRE11A', 'NBN', 'RAD51', 'RAD51B', 'RAD51C', 'RAD51D', 'XRCC2',
+            'XRCC3', 'BRCA1', 'BRCA2', 'PALB2', 'RAD52', 'RAD54L', 'RAD54B',
+            'ERCC1', 'ERCC2', 'ERCC3', 'ERCC4', 'ERCC5', 'XPA', 'XPC',
+            'DDB1', 'DDB2', 'RPA1', 'RPA2', 'RPA3', 'PCNA', 'RFC1', 'LIG1',
+            'POLD1', 'POLD2', 'POLD3', 'POLD4', 'POLE', 'POLE2', 'POLE3',
+            'POLE4', 'POLH', 'POLI', 'POLK', 'POLQ', 'REV3L', 'MAD2L2'
+        ],
+
+        'DNA_repair': [
+            'XRCC1', 'XRCC2', 'XRCC3', 'XRCC4', 'XRCC5', 'XRCC6', 'LIG1',
+            'LIG3', 'LIG4', 'PARP1', 'PARP2', 'PARP3', 'APEX1', 'APEX2',
+            'OGG1', 'MUTYH', 'NEIL1', 'NEIL2', 'NEIL3', 'NTH1', 'MPG',
+            'TDG', 'UNG', 'SMUG1', 'MBD4', 'POLB', 'POLD1', 'POLE', 'FEN1',
+            'EXO1', 'MSH2', 'MSH3', 'MSH6', 'MLH1', 'PMS2', 'MLH3', 'PMS1',
+            'PCNA', 'RFC1', 'RAD50', 'MRE11A', 'NBN', 'RAD51', 'RAD51B',
+            'RAD51C', 'RAD51D', 'DMC1', 'BRCA1', 'BRCA2', 'PALB2', 'RAD52',
+            'RAD54L', 'RAD54B', 'ERCC1', 'ERCC2', 'ERCC3', 'ERCC4', 'ERCC5',
+            'ERCC6', 'XPA', 'XPC', 'DDB1', 'DDB2', 'RPA1', 'ATM', 'ATR'
+        ],
+
+        'EMT': [
+            'CDH1', 'CDH2', 'VIM', 'SNAI1', 'SNAI2', 'TWIST1', 'TWIST2',
+            'ZEB1', 'ZEB2', 'GSK3B', 'CTNNB1', 'TGFB1', 'TGFB2', 'TGFB3',
+            'TGFBR1', 'TGFBR2', 'SMAD2', 'SMAD3', 'SMAD4', 'WNT5A', 'WNT5B',
+            'FZD2', 'FZD7', 'NOTCH1', 'NOTCH2', 'JAG1', 'JAG2', 'HIF1A',
+            'EPAS1', 'LOX', 'LOXL2', 'LOXL3', 'LOXL4', 'MMP2', 'MMP3',
+            'MMP9', 'MMP14', 'FN1', 'COL1A1', 'COL1A2', 'COL3A1', 'COL5A1',
+            'SPARC', 'ACTA2', 'TAGLN', 'ITGA5', 'ITGAV', 'ITGB1', 'ITGB6',
+            'PDGFRA', 'PDGFRB', 'FGFR1', 'FGFR2', 'AXL', 'MET', 'EGFR',
+            'SRC', 'PTK2', 'STAT3', 'FOXC2', 'TCF4', 'KLF8'
+        ],
+
+        'Hypoxia': [
+            'HIF1A', 'EPAS1', 'ARNT', 'VHL', 'EGLN1', 'EGLN2', 'EGLN3',
+            'VEGFA', 'VEGFB', 'VEGFC', 'PGF', 'FLT1', 'KDR', 'FLT4', 'NRP1',
+            'ANGPT1', 'ANGPT2', 'TEK', 'EDN1', 'EDNRA', 'EDNRB', 'EPO',
+            'EPOR', 'ENO1', 'ENO2', 'LDHA', 'LDHB', 'PFKL', 'PFKM', 'PFKP',
+            'PKM', 'ALDOA', 'ALDOB', 'ALDOC', 'PGK1', 'PGK2', 'TPI1', 'GAPDH',
+            'SLC2A1', 'SLC2A3', 'PDK1', 'PDK2', 'PDK3', 'PDK4', 'CA9', 'CA12',
+            'BNIP3', 'BNIP3L', 'BCL2L1', 'MMP2', 'MMP9', 'MMP14', 'LOX',
+            'LOXL2', 'LOXL4', 'P4HA1', 'P4HA2', 'PLOD1', 'PLOD2', 'PLOD3',
+            'ADM', 'CXCR4', 'MET', 'SERPINE1', 'PLAUR', 'TFRC', 'FTH1', 'CP'
+        ],
+
+        'Inflammation': [
+            'TNF', 'IL1A', 'IL1B', 'IL6', 'IL8', 'CXCL1', 'CXCL2', 'CXCL3',
+            'CXCL5', 'CXCL10', 'CCL2', 'CCL3', 'CCL4', 'CCL5', 'CCL20',
+            'TNFRSF1A', 'TNFRSF1B', 'IL1R1', 'IL1R2', 'IL6R', 'IL6ST',
+            'CXCR1', 'CXCR2', 'CXCR4', 'CCR1', 'CCR2', 'CCR5', 'NFKB1',
+            'NFKB2', 'RELA', 'RELB', 'REL', 'NFKBIA', 'IKBKB', 'IKBKG',
+            'STAT1', 'STAT3', 'JAK1', 'JAK2', 'TYK2', 'IFNG', 'IFNGR1',
+            'IFNGR2', 'IFNAR1', 'IFNAR2', 'IRF1', 'IRF3', 'IRF7', 'TLR2',
+            'TLR4', 'TLR7', 'TLR9', 'MYD88', 'TRAF6', 'IRAK1', 'IRAK4',
+            'PTGS2', 'PTGES', 'PTGER2', 'PTGER4', 'ALOX5', 'LTA4H', 'ICAM1',
+            'VCAM1', 'SELE', 'SELP', 'ITGAM', 'ITGAX', 'CD40', 'CD40LG'
+        ],
+
+        'Invasion': [
+            'MMP1', 'MMP2', 'MMP3', 'MMP7', 'MMP9', 'MMP10', 'MMP11', 'MMP13',
+            'MMP14', 'MMP15', 'MMP16', 'TIMP1', 'TIMP2', 'TIMP3', 'TIMP4',
+            'ADAMTS1', 'ADAMTS4', 'ADAMTS5', 'ADAM10', 'ADAM17', 'ADAM9',
+            'CTSK', 'CTSB', 'CTSL', 'CTSD', 'PLAU', 'PLAUR', 'SERPINE1',
+            'SERPINB5', 'ITGA5', 'ITGAV', 'ITGB1', 'ITGB3', 'ITGB5', 'ITGB6',
+            'CD44', 'MET', 'RON', 'AXL', 'EGFR', 'ERBB2', 'FGFR1', 'PDGFRA',
+            'PDGFRB', 'SRC', 'PTK2', 'PXN', 'BCAR1', 'ARHGEF7', 'RHOA',
+            'RAC1', 'CDC42', 'ROCK1', 'ROCK2', 'PAK1', 'PAK4', 'LIMK1',
+            'LIMK2', 'CFL1', 'PFN1', 'VIM', 'LAMC2', 'LAMB3', 'COL4A1',
+            'FN1', 'SPARC', 'THBS1', 'SPP1', 'TNC', 'CXCR4', 'CXCL12'
+        ],
+
+        'Metastasis': [
+            'CDH1', 'CDH2', 'VIM', 'SNAI1', 'SNAI2', 'TWIST1', 'ZEB1', 'ZEB2',
+            'MMP2', 'MMP9', 'MMP14', 'CTSK', 'PLAU', 'PLAUR', 'ITGA5',
+            'ITGAV', 'ITGB1', 'ITGB3', 'CD44', 'MET', 'AXL', 'EGFR', 'ERBB2',
+            'SRC', 'PTK2', 'CXCR4', 'CXCL12', 'CCR7', 'CCL21', 'VEGFA',
+            'VEGFC', 'FLT4', 'ANGPT2', 'TIE1', 'S100A4', 'SPARC', 'SPP1',
+            'THBS1', 'TNC', 'FN1', 'LOX', 'LOXL2', 'TGFB1', 'TGFBR1',
+            'SMAD2', 'SMAD3', 'SMAD4', 'STAT3', 'NFKB1', 'RELA', 'IL6',
+            'IL8', 'TNF', 'HIF1A', 'EPAS1', 'TWIST2', 'FOXC2', 'TCF4',
+            'LEF1', 'CTNNB1', 'WNT5A', 'NRP1', 'NRP2', 'SEMA3A', 'SEMA3C',
+            'PLXNA1', 'PLXNA2', 'RHOC', 'ROCK1', 'ROCK2', 'LIMK1', 'CFL1'
+        ],
+
+        'Proliferation': [
+            'MKI67', 'PCNA', 'TOP2A', 'CCNA2', 'CCNB1', 'CCNB2', 'CCND1',
+            'CCNE1', 'CDK1', 'CDK2', 'CDK4', 'CDK6', 'E2F1', 'E2F2', 'E2F3',
+            'MYBL2', 'MCM2', 'MCM3', 'MCM4', 'MCM5', 'MCM6', 'MCM7', 'MCM10',
+            'RRM1', 'RRM2', 'TYMS', 'DTYMK', 'TK1', 'POLA1', 'POLA2', 'PRIM1',
+            'PRIM2', 'POLE', 'POLE2', 'POLD1', 'POLD2', 'FEN1', 'LIG1',
+            'RFC1', 'RFC2', 'RFC3', 'RFC4', 'RFC5', 'CHEK1', 'AURKA', 'AURKB',
+            'PLK1', 'BUB1', 'BUB1B', 'CDC20', 'CENPA', 'CENPF', 'CENPE',
+            'KIF11', 'KIF20A', 'KIF23', 'PRC1', 'BIRC5', 'FOXM1', 'UBE2C',
+            'TPX2', 'NUSAP1', 'CEP55', 'ASPM', 'CDCA8', 'CDCA3', 'CDCA2',
+            'MELK', 'NEK2', 'TTK', 'CDC6', 'CDT1', 'ORC1', 'HELLS', 'UHRF1'
+        ],
+
+        'Quiescence': [
+            'CDKN1A', 'CDKN1B', 'CDKN1C', 'CDKN2A', 'CDKN2B', 'CDKN2C',
+            'CDKN2D', 'TP53', 'RB1', 'RBL1', 'RBL2', 'BTG1', 'BTG2', 'TOB1',
+            'TOB2', 'GAS1', 'GAS2', 'GAS6', 'GADD45A', 'GADD45B', 'GADD45G',
+            'FOXO1', 'FOXO3', 'FOXO4', 'PTEN', 'TSC1', 'TSC2', 'MTOR',
+            'RPTOR', 'AKT1', 'GSK3B', 'CCNG1', 'CCNG2', 'TGFB1', 'TGFB2',
+            'TGFBR1', 'TGFBR2', 'SMAD2', 'SMAD3', 'SMAD4', 'SMAD7', 'SKP2',
+            'CKS1B', 'CCNE1', 'CDC25A', 'E2F1', 'RRM2B', 'DDB2', 'SESN1',
+            'SESN2', 'TSC22D3', 'TXNIP', 'EGR1', 'ATF3', 'DDIT3', 'DDIT4',
+            'CITED2', 'HES1', 'HOPX', 'ID1', 'ID2', 'ID3', 'NDRG1', 'NUPR1'
+        ],
+
+        'Stemness': [
+            'POU5F1', 'SOX2', 'NANOG', 'MYC', 'KLF4', 'LIN28A', 'LIN28B',
+            'ZFP42', 'DPPA4', 'DPPA2', 'DPPA3', 'TDGF1', 'GDF3', 'PROM1',
+            'CD44', 'ALDH1A1', 'ALDH1A2', 'ALDH1A3', 'BMI1', 'EZH2', 'SUZ12',
+            'DNMT1', 'DNMT3A', 'DNMT3B', 'TET1', 'TET2', 'TET3', 'WNT3A',
+            'WNT5A', 'FZD7', 'LRP5', 'LRP6', 'CTNNB1', 'LEF1', 'TCF7L1',
+            'TCF7L2', 'NOTCH1', 'NOTCH2', 'JAG1', 'JAG2', 'DLL1', 'HES1',
+            'HEY1', 'SHH', 'PTCH1', 'SMO', 'GLI1', 'GLI2', 'SMAD1', 'SMAD5',
+            'ID1', 'ID2', 'ID3', 'BMP4', 'BMP7', 'NODAL', 'LEFTY1', 'LEFTY2',
+            'STAT3', 'JAK2', 'LIF', 'LIFR', 'IL6ST', 'NR6A1', 'NR0B1',
+            'SALL4', 'UTF1', 'FOXD3', 'NR5A2', 'ESRRB', 'PRDM14', 'TRIM28'
+        ]
+    }
+
 
 class CancerSEAPathways:
     """CancerSEA pathway gene lists.

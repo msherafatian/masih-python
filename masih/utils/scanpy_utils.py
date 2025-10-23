@@ -163,10 +163,17 @@ def normalize_data(adata, target_sum: float = 1e4) -> None:
     """
     Normalize data (equivalent to NormalizeData in Seurat).
 
+    IMPORTANT: Stores raw counts before normalization.
+
     Args:
         adata: AnnData object
         target_sum: Target sum for normalization
     """
+    # Store raw counts in a layer for later use (e.g., DE analysis)
+    if 'raw_counts' not in adata.layers:
+        adata.layers['raw_counts'] = adata.X.copy()
+
+    # Normalize
     sc.pp.normalize_total(adata, target_sum=target_sum)
     sc.pp.log1p(adata)
 
