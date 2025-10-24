@@ -104,6 +104,41 @@ def summarize_trajectory(trajectory_data: Dict) -> pd.DataFrame:
         'Value': []
     }
 
+    print(
+        f"DEBUG summarize_trajectory: trajectory_data keys = {list(trajectory_data.keys())}")
+
+    # Handle new trajectory data structure with 'parameters', 'results', 'stats'
+    if 'parameters' in trajectory_data:
+        params = trajectory_data['parameters']
+        print(f"DEBUG summarize_trajectory: Found parameters: {params}")
+
+        if isinstance(params, dict):
+            for key, value in params.items():
+                summary['Parameter'].append(key)
+                summary['Value'].append(str(value))
+
+    if 'stats' in trajectory_data:
+        stats = trajectory_data['stats']
+        print(f"DEBUG summarize_trajectory: Found stats: {stats}")
+
+        if isinstance(stats, dict):
+            for key, value in stats.items():
+                summary['Parameter'].append(f"stat_{key}")
+                summary['Value'].append(str(value))
+
+    if 'results' in trajectory_data:
+        results = trajectory_data['results']
+        print(
+            f"DEBUG summarize_trajectory: Found results (type: {type(results)})")
+
+        # If results is a dict with useful summary info
+        if isinstance(results, dict):
+            for key in ['n_paths', 'n_branches', 'connectivities', 'method']:
+                if key in results:
+                    summary['Parameter'].append(key)
+                    summary['Value'].append(str(results[key]))
+
+    # Also handle legacy structure (for backwards compatibility)
     if 'method' in trajectory_data:
         summary['Parameter'].append('Method')
         summary['Value'].append(trajectory_data['method'])
@@ -116,7 +151,24 @@ def summarize_trajectory(trajectory_data: Dict) -> pd.DataFrame:
         summary['Parameter'].append('Root cell')
         summary['Value'].append(trajectory_data['root_cell'])
 
-    return pd.DataFrame(summary)
+    # Add subset session info if present
+    if 'subset_session_id' in trajectory_data and trajectory_data['subset_session_id']:
+        summary['Parameter'].append('Subset Session ID')
+        summary['Value'].append(str(trajectory_data['subset_session_id']))
+
+    result_df = pd.DataFrame(summary)
+    print(
+        f"DEBUG summarize_trajectory: Created DataFrame with shape {result_df.shape}")
+
+    if result_df.empty:
+        print("WARNING: Trajectory DataFrame is empty - no recognized keys found")
+        # Create a minimal summary with available keys
+        if trajectory_data:
+            summary['Parameter'].append('Available Keys')
+            summary['Value'].append(', '.join(trajectory_data.keys()))
+            result_df = pd.DataFrame(summary)
+
+    return result_df
 
 
 def generate_methods_text(processing_params: Dict,
@@ -332,35 +384,88 @@ def prepare_download_data(adata, include_options: List[str],
     """
     sheets = {}
 
+    print(f"DEBUG prepare_download_data: include_options = {include_options}")
+    print(
+        f"DEBUG prepare_download_data: cancersea_scores is None? {cancersea_scores is None}")
+    print(
+        f"DEBUG prepare_download_data: markers_df is None? {markers_df is None}")
+    print(
+        f"DEBUG prepare_download_data: trajectory_data is None? {trajectory_data is None}")
+
     if 'metadata' in include_options:
+        print("DEBUG: Adding Cell_Metadata sheet")
         sheets['Cell_Metadata'] = pd.DataFrame(adata.obs)
 
     if 'cluster_stats' in include_options:
+        print("DEBUG: Adding Cluster_Statistics sheet")
         sheets['Cluster_Statistics'] = calculate_cluster_stats(
             adata, cluster_key)
 
     if 'cancersea_scores' in include_options and cancersea_scores:
+        print(
+            f"DEBUG: Processing CancerSEA scores, pathways: {list(cancersea_scores.keys())}")
         score_data = pd.DataFrame()
         for pathway, score_col in cancersea_scores.items():
             if score_col in adata.obs.columns:
                 score_data[pathway] = adata.obs[score_col]
+                print(f"  - Added pathway: {pathway} (column: {score_col})")
+            else:
+                print(
+                    f"  - WARNING: Column {score_col} not found in adata.obs")
         if not score_data.empty:
             sheets['CancerSEA_Scores'] = score_data
+            print(
+                f"DEBUG: Added CancerSEA_Scores sheet with shape {score_data.shape}")
+        else:
+            print("WARNING: CancerSEA score_data is empty!")
 
     if 'pathway_avg' in include_options and cancersea_scores:
-        from masih.analysis.cancersea_utils import calculate_pathway_averages
-        sheets['Pathway_Averages'] = calculate_pathway_averages(
-            adata, cancersea_scores, cluster_key)
+        print("DEBUG: Calculating pathway averages")
+        try:
+            from masih.utils.cancersea_utils import calculate_pathway_averages
+            pathway_avg = calculate_pathway_averages(
+                adata, cancersea_scores, cluster_key)
+            sheets['Pathway_Averages'] = pathway_avg
+            print(
+                f"DEBUG: Added Pathway_Averages sheet with shape {pathway_avg.shape}")
+        except Exception as e:
+            print(f"ERROR calculating pathway averages: {e}")
 
     if 'cellcycle_props' in include_options:
+        print("DEBUG: Calculating cell cycle proportions")
         cc_props = calculate_cellcycle_proportions(adata, cluster_key)
         if not cc_props.empty:
             sheets['Cell_Cycle_Proportions'] = cc_props
+            print(
+                f"DEBUG: Added Cell_Cycle_Proportions sheet with shape {cc_props.shape}")
+        else:
+            print(
+                "INFO: Cell cycle proportions not available (phase column may not exist)")
 
     if 'markers' in include_options and markers_df is not None:
-        sheets['Marker_Genes'] = markers_df
+        if isinstance(markers_df, pd.DataFrame) and not markers_df.empty:
+            sheets['Marker_Genes'] = markers_df
+            print(
+                f"DEBUG: Added Marker_Genes sheet with shape {markers_df.shape}")
+            print(f"DEBUG: Marker_Genes columns: {list(markers_df.columns)}")
+        else:
+            print("WARNING: markers_df is None or empty, skipping Marker_Genes sheet")
+    elif 'markers' in include_options:
+        print("WARNING: 'markers' in options but markers_df is None")
 
     if 'trajectory' in include_options and trajectory_data:
-        sheets['Trajectory_Summary'] = summarize_trajectory(trajectory_data)
+        print(
+            f"DEBUG: Processing trajectory data: {list(trajectory_data.keys()) if isinstance(trajectory_data, dict) else type(trajectory_data)}")
+        traj_summary = summarize_trajectory(trajectory_data)
+        if not traj_summary.empty:
+            sheets['Trajectory_Summary'] = traj_summary
+            print(
+                f"DEBUG: Added Trajectory_Summary sheet with shape {traj_summary.shape}")
+        else:
+            print("WARNING: Trajectory summary is empty")
+    elif 'trajectory' in include_options:
+        print("WARNING: 'trajectory' in options but trajectory_data is None or empty")
 
+    print(
+        f"DEBUG prepare_download_data: Returning {len(sheets)} sheets: {list(sheets.keys())}")
     return sheets

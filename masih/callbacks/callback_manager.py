@@ -68,16 +68,8 @@ def register_tab_switching(app):
             return create_compare_layout()
 
         elif active_tab == "explorer":
-            return dbc.Container([
-                dbc.Alert(
-                    [
-                        html.H4("Interactive Explorer Module",
-                                className="alert-heading"),
-                        html.P("Cell explorer module will be implemented here."),
-                    ],
-                    color="info"
-                )
-            ])
+            from masih.modules.explorer import create_explorer_layout
+            return create_explorer_layout()
 
         elif active_tab == "export":
             from masih.modules.export import create_export_layout
@@ -197,6 +189,10 @@ def register_all_callbacks(app):
     # Register compare module callbacks
     from masih.modules.compare import register_compare_callbacks
     register_compare_callbacks(app)
+
+    # Register explorer module callbacks
+    from masih.modules.explorer import register_explorer_callbacks
+    register_explorer_callbacks(app)
 
     # Module-specific callbacks will be registered here as we build them
     # Example:

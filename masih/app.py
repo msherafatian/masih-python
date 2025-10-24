@@ -166,6 +166,41 @@ app.validation_layout = html.Div([
         dcc.Graph(id='compare-heatmap'),
         html.Div(id='compare-stats-table'),
     ]),
+    # Explorer module IDs
+    html.Div([
+        dcc.Interval(id='explorer-reload-interval'),
+        dcc.Dropdown(id='explorer-color-by'),
+        dcc.Dropdown(id='explorer-reduction'),
+        dcc.Dropdown(id='explorer-gene'),
+        dcc.Graph(id='explorer-plot'),
+        html.Div(id='explorer-cell-info'),
+    ]),
+    # Export module IDs
+    html.Div([
+        dcc.Checklist(id='export-include-raw'),
+        dcc.Checklist(id='export-include-embeddings'),
+        dbc.Button(id='download-anndata-button'),
+        dbc.Button(id='download-excel-button'),
+        dbc.Button(id='download-csv-button'),
+        dbc.Button(id='download-plot-button'),
+        dbc.Button(id='download-all-button'),  # ADD THIS LINE
+        dcc.Dropdown(id='export-table-select'),
+        dcc.Dropdown(id='export-plot-select'),
+        dcc.Dropdown(id='export-plot-format'),
+        dbc.Input(id='export-plot-width'),
+        dbc.Input(id='export-plot-height'),
+        dbc.Tabs(id='export-docs-tabs'),  # ADD THIS LINE
+        html.Div(id='download-anndata-status'),
+        html.Div(id='download-table-status'),
+        html.Div(id='download-plot-status'),
+        html.Div(id='download-all-status'),  # ADD THIS LINE
+        html.Div(id='export-docs-content'),  # ADD THIS LINE
+        dcc.Download(id='download-anndata'),
+        dcc.Download(id='download-excel'),
+        dcc.Download(id='download-csv'),
+        dcc.Download(id='download-plot'),
+        dcc.Download(id='download-all'),  # ADD THIS LINE
+    ]),
     # Export module IDs
     html.Div([
         dcc.Interval(id='export-reload-interval'),
