@@ -4,7 +4,17 @@ channels:
   - bioconda
   - defaults
 dependencies:
+  # Python version
   - python>=3.10
+
+  # Packages that conda handles better than pip
+  # (especially python-igraph which can be tricky with pip on some systems)
+  - python-igraph>=0.10.0
+  - leidenalg>=0.10.0
+  
+  # Pip for remaining packages
   - pip
+  
+  # Install everything else via pip
   - pip:
       - -r requirements.txt

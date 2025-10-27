@@ -18,9 +18,21 @@ scipy>=1.11.0
 scikit-learn>=1.3.0
 statsmodels>=0.14.0
 
+# Clustering & Graph Algorithms (CRITICAL for scanpy)
+python-igraph>=0.10.0    # Required for leiden clustering
+leidenalg>=0.10.0        # Leiden algorithm implementation
+louvain>=0.8.0           # Louvain clustering (optional but useful)
+umap-learn>=0.5.0        # UMAP dimensionality reduction
+networkx>=3.0            # Graph algorithms (scanpy dependency)
+numba>=0.57.0            # Performance optimization (scanpy dependency)
+
+# Additional Scientific Computing
+scikit-misc>=0.3.0       # Loess and other utilities
+
 # Visualization
 matplotlib>=3.7.0
 seaborn>=0.12.0
+kaleido>=0.2.1          # Static image export (PNG, PDF, SVG) for plotly
 
 # File I/O
 openpyxl>=3.1.0
@@ -29,3 +41,6 @@ h5py>=3.9.0
 
 # Utilities
 python-dateutil>=2.8.0
+tqdm>=4.65.0            # Progress bars (scanpy uses this)
+natsort>=8.4.0          # Natural sorting (scanpy dependency)
+gunicorn>=21.2.0
