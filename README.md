@@ -248,7 +248,7 @@ vX.Y.Z → https://doi.org/10.5281/zenodo.17824053
 }
 
 *[Full publication citation will be added upon publication]*
-
+```
 ---
 
 ## 📞 Support
