@@ -1,10 +1,11 @@
 # MASIH-Python: Modular Analysis Suite for Interactive Heterogeneity <img src="https://raw.githubusercontent.com/msherafatian/masih/main/man/figures/logo.PNG" align="right" width="120" />
 
+[![DOI](https://zenodo.org/badge/1080768114.svg)](https://doi.org/10.5281/zenodo.17824054)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/msherafatian/masih-python.svg)](https://github.com/msherafatian/masih-python/issues)
 
-**A Python/Dash implementation for comprehensive single-cell RNA sequencing analysis, maintaining architectural parity with the [R/Shiny version](https://github.com/msherafatian/masih).**
+**A Python/Dash implementation for comprehensive single-cell RNA sequencing analysis, maintaining architectural parity with the [R/Shiny version](https://github.com/msherafatian/masih).**sequencing analysis, maintaining architectural parity with the [R/Shiny version](https://github.com/msherafatian/masih).**
 
 ---
 
@@ -224,17 +225,27 @@ We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING
 
 ## 📄 Citation
 
-If you use MASIH-Python in your research, please cite:
+If you use MASIH-Python in your research, please cite the Zenodo DOI:
+
+[![DOI](https://zenodo.org/badge/1080768114.svg)](https://doi.org/10.5281/zenodo.17824054)
+
+**Concept DOI (latest MASIH-Python release):**  
+https://doi.org/10.5281/zenodo.17824054
+
+**Version-specific DOI (e.g., for the archived release used in a paper):**  
+vX.Y.Z → https://doi.org/10.5281/zenodo.17824053
+
+### BibTeX
 
 ```bibtex
-@software{masih_python2024,
-  title = {MASIH-Python: Modular Analysis Suite for Interactive Heterogeneity},
-  author = {Sherafatian, Masih},
-  year = {2024},
-  url = {https://github.com/msherafatian/masih-python},
-  version = {0.1.0}
+@software{masih_python_2024,
+  author       = {Sherafatian, Masih},
+  title        = {MASIH-Python: Modular Analysis Suite for Interactive Heterogeneity},
+  year         = 2024,
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.17824054},
+  url          = {https://doi.org/10.5281/zenodo.17824054}
 }
-```
 
 *[Full publication citation will be added upon publication]*
 
